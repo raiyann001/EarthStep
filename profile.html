@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile · EarthStep</title>
+  <meta name="description" content="Your EarthStep profile — XP, streak, Earth Health, and earned badges.">
+  <meta property="og:title" content="Profile · EarthStep">
+  <meta property="og:description" content="Your EarthStep profile — XP, streak, Earth Health, and earned badges.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#2E7D32">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  
+</head>
+<body>
+  
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="EarthStep logo" class="logo-mark" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>ES</span>'">EarthStep</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+<a href="features.html">Features</a>
+<a href="how-it-works.html">How It Works</a>
+<a href="impact.html">Impact</a>
+<a href="leaderboard.html">Leaderboard</a>
+      <div class="has-dropdown">
+        <span>Explore <i data-lucide="chevron-down"></i></span>
+        <div class="dropdown-menu"><div class="dropdown-menu-inner">
+          <a href="about.html">About</a>
+<a href="research.html">Research</a>
+<a href="gallery.html">Gallery</a>
+<a href="blog.html">Blog</a>
+<a href="community.html">Community</a>
+<a href="contact.html">Contact</a>
+        </div></div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <span id="navAuthSlot"></span>
+      <a href="download.html" class="btn btn-primary btn-sm"><i data-lucide="download"></i>Download App</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <div class="mobile-menu-top">
+    <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="EarthStep logo" class="logo-mark" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>ES</span>'">EarthStep</a>
+    <button class="mobile-close" aria-label="Close menu"><i data-lucide="x"></i></button>
+  </div>
+  <a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="features.html">Features</a>
+<a href="how-it-works.html">How It Works</a>
+<a href="research.html">Research</a>
+<a href="impact.html">Environmental Impact</a>
+<a href="gallery.html">Gallery</a>
+<a href="blog.html">Blog</a>
+<a href="community.html">Community</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="download.html">Download</a>
+<a href="contact.html">Contact</a>
+  <a href="download.html" class="btn btn-primary btn-block" style="margin-top:24px;">Download App</a>
+</div>
+
+  <main>
+  
+<section class="page-hero" style="padding-bottom:0;">
+  <div class="container" style="text-align:left; max-width:760px;">
+    <div id="verifyBanner" class="email-verify-banner" style="display:none;">
+      <span><i data-lucide="mail-warning" style="width:16px;height:16px;vertical-align:-3px;margin-right:6px;"></i>Please verify your email to unlock full access.</span>
+      <button type="button" id="resendVerifyBtn">Resend verification email</button>
+    </div>
+    <div class="profile-head" id="profileHead" data-aos="fade-up">
+      <div class="profile-avatar" id="profileAvatar">ES</div>
+      <div>
+        <h1 id="profileName">Loading…</h1>
+        <span class="tag" id="profileRole">Eco Explorer</span>
+        <p class="form-note" style="margin-top:6px;" id="profileMeta"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container" style="max-width:760px;">
+    <div class="profile-stats" data-aos="fade-up">
+      <div class="profile-stat"><div class="num" id="statChallenges">—</div><div class="label">Challenges Completed</div></div>
+      <div class="profile-stat"><div class="num" id="statStreak">—</div><div class="label">Current Streak</div></div>
+      <div class="profile-stat"><div class="num" id="statXp">—</div><div class="label">Total XP</div></div>
+    </div>
+
+    <div class="section-head" style="margin-top:48px; margin-bottom:20px;" data-aos="fade-up">
+      <span class="eyebrow">My Earth</span>
+      <h2 style="font-size:var(--fs-xl);">Earth Health · <span id="statHealth">—</span>%</h2>
+    </div>
+    <div class="card" data-aos="fade-up">
+      <div class="challenge-progress-track" style="margin:4px 0 6px;"><span id="healthBar" style="width:0%;"></span></div>
+      <p class="form-note">Earth Health grows as you complete daily challenges — the full Virtual Earth view (trees, birds, flowers) connects in a later step.</p>
+    </div>
+
+    <div class="section-head" style="margin-top:48px; margin-bottom:20px;" data-aos="fade-up">
+      <span class="eyebrow">Rewards</span>
+      <h2 style="font-size:var(--fs-xl);">Badges</h2>
+    </div>
+    <div class="grid-4" id="badgeGrid" data-aos="fade-up"></div>
+
+    <div class="profile-menu mt-lg" data-aos="fade-up">
+      <a href="#">Settings <i data-lucide="chevron-right"></i></a>
+      <a href="#">Language <i data-lucide="chevron-right"></i></a>
+      <a href="#">Notifications <i data-lucide="chevron-right"></i></a>
+      <a href="contact.html">Help &amp; Support <i data-lucide="chevron-right"></i></a>
+      <a href="about.html">About EarthStep <i data-lucide="chevron-right"></i></a>
+      <button type="button" class="danger" id="logoutBtn">Log Out <i data-lucide="log-out"></i></button>
+    </div>
+  </div>
+</section>
+
+  </main>
+  
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="EarthStep logo" class="logo-mark" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>ES</span>'">EarthStep</a>
+        <p>A gamified sustainability platform turning daily eco-friendly choices into a growing, living Virtual Earth.</p>
+        <div class="social-row" style="margin-top:20px;">
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="download.html">Download</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Impact</h4>
+        <ul>
+          <li><a href="impact.html">Environmental Impact</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get the App</h4>
+        <ul>
+          <li><a href="download.html">iOS App</a></li>
+          <li><a href="download.html">Android App</a></li>
+          <li><a href="contact.html">Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <small>&copy; 2026 EarthStep. Every step shapes our future.</small>
+      <small>Built with care for the planet · Privacy Policy · Terms of Service</small>
+    </div>
+  </div>
+</footer>
+
+  
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <!-- Firebase (Step 1: Authentication) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="script.js"></script>
+
+<script>
+  // Catalog of badges the Reward System (a later step) will auto-unlock.
+  // Shown here as locked/earned based on whatever is already in the
+  // user's `badges` array in Firestore (empty for brand-new accounts).
+  const BADGE_CATALOG = ['Eco Beginner', '7-Day Streak', 'Tree Protector', 'Earth Hero', 'Climate Champion'];
+
+  function formatJoinedDate(ts) {
+    if (!ts || !ts.toDate) return '';
+    return 'Joined ' + ts.toDate().toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+  }
+
+  document.addEventListener('earthstep-auth-ready', (e) => {
+    const { user, profile } = e.detail;
+    if (!user) { window.location.href = 'login.html'; return; }
+
+    const p = profile || {}; // profile may briefly be null on a first-ever login race
+    document.getElementById('profileAvatar').textContent = EarthStepAuth.initialsFrom(p.fullName || user.displayName);
+    document.getElementById('profileName').textContent = p.fullName || user.displayName || 'Eco Explorer';
+    document.getElementById('profileRole').textContent = 'Eco Explorer · Level ' + (p.level ?? 1);
+    document.getElementById('profileMeta').textContent = [p.username ? '@' + p.username : '', formatJoinedDate(p.joinedDate)].filter(Boolean).join(' · ');
+    document.getElementById('statChallenges').textContent = p.completedChallenges ?? 0;
+    document.getElementById('statStreak').textContent = (p.streak ?? 0) + ' Days';
+    document.getElementById('statXp').textContent = (p.xp ?? 0) + ' XP';
+    document.getElementById('statHealth').textContent = p.earthHealth ?? 0;
+    document.getElementById('healthBar').style.width = (p.earthHealth ?? 0) + '%';
+
+    const earned = new Set(p.badges || []);
+    const grid = document.getElementById('badgeGrid');
+    grid.innerHTML = BADGE_CATALOG.map(name => {
+      const isEarned = earned.has(name);
+      return `<div class="badge-tile${isEarned ? '' : ' locked'}">
+        <div class="icon"><i data-lucide="${isEarned ? 'award' : 'lock'}"></i></div>
+        <h4>${name}</h4>
+        <p>${isEarned ? 'Earned' : 'Locked'}</p>
+      </div>`;
+    }).join('');
+
+    const verifyBanner = document.getElementById('verifyBanner');
+    verifyBanner.style.display = user.emailVerified ? 'none' : 'flex';
+
+    if (window.lucide) lucide.createIcons();
+  });
+
+  document.getElementById('resendVerifyBtn')?.addEventListener('click', async (e) => {
+    e.target.textContent = 'Sending…';
+    try {
+      await EarthStepAuth.resendVerificationEmail();
+      e.target.textContent = 'Sent — check your inbox';
+    } catch (err) {
+      e.target.textContent = 'Could not send — try again';
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await EarthStepAuth.logOut();
+    window.location.href = 'index.html';
+  });
+</script>
+
+
+</body>
+</html>

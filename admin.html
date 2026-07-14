@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · EarthStep</title>
+  <meta name="description" content="See EarthStep's top-ranked users by XP, Level, Earth Health, and Challenges Completed — updated daily.">
+  <meta property="og:title" content="Admin · EarthStep">
+  <meta property="og:description" content="See EarthStep's top-ranked users by XP, Level, Earth Health, and Challenges Completed — updated daily.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#2E7D32">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  
+</head>
+<body>
+  
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="EarthStep logo" class="logo-mark" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>ES</span>'">EarthStep</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+<a href="features.html">Features</a>
+<a href="how-it-works.html">How It Works</a>
+<a href="impact.html">Impact</a>
+<a href="leaderboard.html">Leaderboard</a>
+      <div class="has-dropdown">
+        <span>Explore <i data-lucide="chevron-down"></i></span>
+        <div class="dropdown-menu"><div class="dropdown-menu-inner">
+          <a href="about.html">About</a>
+<a href="research.html">Research</a>
+<a href="gallery.html">Gallery</a>
+<a href="blog.html">Blog</a>
+<a href="community.html">Community</a>
+<a href="contact.html">Contact</a>
+        </div></div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <span id="navAuthSlot"></span>
+      <a href="download.html" class="btn btn-primary btn-sm"><i data-lucide="download"></i>Download App</a>
+    </div>
+    <button class="nav-toggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <div class="mobile-menu-top">
+    <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="EarthStep logo" class="logo-mark" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>ES</span>'">EarthStep</a>
+    <button class="mobile-close" aria-label="Close menu"><i data-lucide="x"></i></button>
+  </div>
+  <a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="features.html">Features</a>
+<a href="how-it-works.html">How It Works</a>
+<a href="research.html">Research</a>
+<a href="impact.html">Environmental Impact</a>
+<a href="gallery.html">Gallery</a>
+<a href="blog.html">Blog</a>
+<a href="community.html">Community</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="download.html">Download</a>
+<a href="contact.html">Contact</a>
+  <a href="download.html" class="btn btn-primary btn-block" style="margin-top:24px;">Download App</a>
+</div>
+
+  <main>
+  
+
+<section class="page-hero" style="padding-bottom:32px;">
+  <div class="container">
+    <span class="eyebrow">Admin only</span>
+    <h1 style="font-size:var(--fs-4xl);">Control Panel.</h1>
+    <p class="lede">Manage daily challenges, users, announcements, and badges — no code changes needed.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+
+    <div id="adminDenied" class="card" style="display:none; text-align:center; max-width:520px; margin:0 auto;">
+      <div class="card-icon" style="margin:0 auto 16px;"><i data-lucide="shield-alert"></i></div>
+      <h3>Admins only</h3>
+      <p>This page is restricted. If this is your account, ask an existing admin to set your role to <code>admin</code> in Firestore (<code>users/&lt;your-uid&gt;.role</code>).</p>
+      <a href="index.html" class="btn btn-ghost" style="margin-top:20px;">Back home</a>
+    </div>
+
+    <div id="adminLoading" class="card" style="text-align:center; max-width:520px; margin:0 auto;">
+      <p>Checking admin access…</p>
+    </div>
+
+    <div id="adminContent" style="display:none;">
+      <div class="tabs" data-tabs="admin" data-aos="fade-up">
+        <button class="tab-btn active" data-key="challenges">Challenges</button>
+        <button class="tab-btn" data-key="users">Users</button>
+        <button class="tab-btn" data-key="announcements">Announcements</button>
+        <button class="tab-btn" data-key="badges">Badges</button>
+        <button class="tab-btn" data-key="analytics">Analytics</button>
+      </div>
+
+      <!-- Challenges -->
+      <div data-panel="admin" data-key="challenges" data-aos="fade-up">
+        <div class="grid-2" style="align-items:flex-start; grid-template-columns:1fr 1.4fr;">
+          <div class="card">
+            <h3 id="challengeFormTitle">New Challenge</h3>
+            <form id="challengeForm" class="auth-form" style="margin-top:16px;">
+              <input type="hidden" id="cfId">
+              <div class="field"><label>Title</label><input type="text" id="cfTitle" required></div>
+              <div class="field"><label>Description</label><textarea id="cfDescription" rows="3" style="width:100%; padding:13px 15px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--bg); font-family:inherit; font-size:14.5px;"></textarea></div>
+              <div class="field"><label>Category</label><input type="text" id="cfCategory" placeholder="Energy, Plastic, Transit…" required></div>
+              <div class="field"><label>Difficulty</label>
+                <select id="cfDifficulty" style="width:100%; padding:13px 15px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--bg); font-family:inherit; font-size:14.5px;">
+                  <option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option>
+                </select>
+              </div>
+              <div class="field"><label>XP Reward</label><input type="number" id="cfXp" value="25" min="5" max="500" required></div>
+              <div class="field"><label>Estimated Time</label><input type="text" id="cfTime" placeholder="e.g. 10 min"></div>
+              <label class="checkbox-row"><input type="checkbox" id="cfActive" checked><span>Active (eligible for today's rotation)</span></label>
+              <div class="flex gap-sm" style="margin-top:6px;">
+                <button type="submit" class="btn btn-primary" id="cfSubmit">Create Challenge</button>
+                <button type="button" class="btn btn-ghost" id="cfCancel" style="display:none;">Cancel edit</button>
+              </div>
+              <p class="auth-error" id="challengeFormError" style="display:none;"></p>
+            </form>
+          </div>
+          <div class="card">
+            <div class="flex items-center justify-between">
+              <h3>All Challenges</h3>
+              <button type="button" class="btn btn-ghost btn-sm" id="resetChallengesBtn">Deactivate all</button>
+            </div>
+            <div id="challengesTableWrap" style="margin-top:16px; overflow-x:auto;">
+              <table class="leaderboard-table"><thead><tr><th>Title</th><th>Category</th><th>XP</th><th>Status</th><th></th></tr></thead><tbody id="challengesTbody"></tbody></table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users -->
+      <div data-panel="admin" data-key="users" style="display:none;" data-aos="fade-up">
+        <div class="card">
+          <h3>All Users</h3>
+          <p class="form-note">Read-only — user data is only ever edited by the user themselves from their profile.</p>
+          <div style="margin-top:16px; overflow-x:auto;">
+            <table class="leaderboard-table"><thead><tr><th>Name</th><th>Email</th><th>Level</th><th>XP</th><th>Streak</th><th>Role</th></tr></thead><tbody id="usersTbody"></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements -->
+      <div data-panel="admin" data-key="announcements" style="display:none;" data-aos="fade-up">
+        <div class="grid-2" style="align-items:flex-start;">
+          <div class="card">
+            <h3>Send Announcement</h3>
+            <form id="announcementForm" class="auth-form" style="margin-top:16px;">
+              <div class="field"><label>Title</label><input type="text" id="anTitle" required></div>
+              <div class="field"><label>Message</label><textarea id="anBody" rows="4" required style="width:100%; padding:13px 15px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--bg); font-family:inherit; font-size:14.5px;"></textarea></div>
+              <button type="submit" class="btn btn-primary">Publish Announcement</button>
+            </form>
+          </div>
+          <div class="card">
+            <h3>Published</h3>
+            <div id="announcementsList" style="margin-top:16px; display:flex; flex-direction:column; gap:12px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div data-panel="admin" data-key="badges" style="display:none;" data-aos="fade-up">
+        <div class="grid-2" style="align-items:flex-start;">
+          <div class="card">
+            <h3>New Badge</h3>
+            <form id="badgeForm" class="auth-form" style="margin-top:16px;">
+              <div class="field"><label>Name</label><input type="text" id="bgName" required></div>
+              <div class="field"><label>Unlock condition (reference text)</label><input type="text" id="bgCondition" placeholder="e.g. 10 challenges completed" required></div>
+              <button type="submit" class="btn btn-primary">Add Badge</button>
+            </form>
+            <p class="form-note" style="margin-top:14px;">Note: this catalog is for reference and display. The actual auto-unlock thresholds live in <code>assets/js/challenges.js</code> (<code>BADGE_RULES</code>) — update both together when you change a condition.</p>
+          </div>
+          <div class="card">
+            <h3>Badge Catalog</h3>
+            <div id="badgesList" style="margin-top:16px; display:flex; flex-direction:column; gap:10px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div data-panel="admin" data-key="analytics" style="display:none;" data-aos="fade-up">
+        <div class="grid-4" id="analyticsGrid"></div>
+        <p class="form-note" style="margin-top:20px;">These are basic live aggregates from Firestore. For full traffic/behavior analytics, see the Firebase Console → Analytics dashboard for this project.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+  </main>
+  
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="EarthStep logo" class="logo-mark" onerror="this.outerHTML='<span class=&quot;logo-fallback&quot;>ES</span>'">EarthStep</a>
+        <p>A gamified sustainability platform turning daily eco-friendly choices into a growing, living Virtual Earth.</p>
+        <div class="social-row" style="margin-top:20px;">
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="download.html">Download</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Impact</h4>
+        <ul>
+          <li><a href="impact.html">Environmental Impact</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get the App</h4>
+        <ul>
+          <li><a href="download.html">iOS App</a></li>
+          <li><a href="download.html">Android App</a></li>
+          <li><a href="contact.html">Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <small>&copy; 2026 EarthStep. Every step shapes our future.</small>
+      <small>Built with care for the planet · Privacy Policy · Terms of Service</small>
+    </div>
+  </div>
+</footer>
+
+  
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <!-- Firebase (Step 1: Authentication) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="script.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
